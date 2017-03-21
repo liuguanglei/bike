@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>vue.js 2.0 实现的简单分页</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+html {
+    font-size: 12px;
+    font-family: Ubuntu, simHei, sans-serif;
+    font-weight: 400
+}
+
+body {
+    font-size: 1rem
+}
+
+.text-center{
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 21px 0;
+    border-radius: 3px;
+}
+
+.pagination > li {
+    display: inline;
+}
+
+.pagination > li > a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.5;
+    text-decoration: none;
+    color: #009a61;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+    list-style: none;
+}
+
+.pagination > li > a:hover {
+    background-color: #eee;
+}
+
+.pagination .active {
+    color: #fff;
+    background-color: #009a61;
+    border-left: none;
+    border-right: none;
+}
+
+.pagination .active:hover {
+    background: #009a61;
+    cursor: default;
+}
+
+.pagination > li:first-child > a .p {
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.pagination > li:last-child > a {
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+</style>
+<link href="/ssm/plugins/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+<script type="text/javascript" src="/ssm/plugins/vue1/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul class="pagination">
+            <li v-for="index in all">
+                <a  v-bind:class="cur === index + 1 ? 'active' : ''" v-on:click="btnClick(index + 1)">{{ index + 1 }}</a>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            cur: 1, //当前页码
+            all: 8  //总页数
+        },
+        watch: {
+            cur: function(newVal, oldVal){ // 数值产生变化，触发回调
+                console.log(newVal, oldVal);
+            }
+        },    
+        methods: {
+            btnClick: function(i){
+                this.cur = i;
+                // ajax 调取数据...
+            }
+        }
+    })
+</script>
+</html>
