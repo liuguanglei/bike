@@ -1,0 +1,3 @@
+Vue.js v1.0.26
+Vue.js v2.2.0
+Bootstrap v3.3.7
